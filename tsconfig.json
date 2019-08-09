@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es2017"
+    "moduleResolution": "node",
+    "target": "es2017",
+    "pretty": true
   },
   "include": [
     "src/**/*"
