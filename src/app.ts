@@ -1,9 +1,9 @@
 export class Name {
     private firstName: string
     public lastName: string
-    public readonly middleName: string
+    private readonly middleName: string
 
-    public constructor(props: { firstName?: string; lastName?: string }) {
+    public constructor(props: { firstName: string; lastName: string }) {
         const { firstName, lastName } = props
         this.firstName = firstName
         this.lastName = lastName
