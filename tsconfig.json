@@ -3,7 +3,8 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "es2017",
-    "pretty": true
+    "pretty": true,
+    "sourceMap": false
   },
   "include": [
     "src/**/*"

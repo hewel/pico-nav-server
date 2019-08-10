@@ -5,6 +5,7 @@ module.exports = {
         es6: true,
         node: true,
     },
+    parser: '@typescript-eslint/parser',
     parserOptions: {
         ecmaVersion: 2019,
         sourceType: 'module',
@@ -15,10 +16,12 @@ module.exports = {
         'prettier',
         'plugin:import/errors',
         'plugin:import/warnings',
+        'plugin:import/typescript',
+        'plugin:@typescript-eslint/recommended',
     ],
-    plugins: ['prettier'],
+    plugins: ['prettier', '@typescript-eslint'],
     rules: {
-        semi: 'off',
+        semi: [2, 'never'],
         'linebreak-style': 'off',
         'import/no-unresolved': [2, { ignore: [`U|utils.*`] }],
         'import/extensions': [2, 'never', { jsx: 'always', json: 'always' }],
@@ -38,6 +41,13 @@ module.exports = {
                         ignore: ['className', 'children'],
                     },
                 ],
+            },
+        },
+        {
+            files: ['*.config.*', '*.eslintrc.*'],
+            rules: {
+                semi: [2, 'always'],
+                '@typescript-eslint/indent': [2, 2],
             },
         },
     ],
