@@ -1,30 +1,46 @@
 import * as Koa from 'koa'
-import * as Router from 'koa-router'
+import { ApolloServer, gql } from 'apollo-server-koa'
 
-import { Name } from './app'
+// import { merge } from 'lodash'
+
+import { resolvers as websiteResolver } from './GraphQL/Resolvers/website'
 
 const app = new Koa()
-const router = new Router()
 
-const name = new Name({ firstName: 'mike', lastName: 'jack' })
-name.logAllName()
-
-app.use(
-    async (ctx, next): Promise<void> => {
-        ctx.body = 'Hello Koa!'
-        await next()
+const typeDefs = gql`
+    type website {
+        id: ID
+        "The title of this website"
+        title: String
+        "The link of this website"
+        url: String
+        "The detailed description of this website"
+        describe: String
+        "The logo of this website"
+        favicon: String
+        "Time stamp of creation time"
+        createdAt: String
+        "Time stamp of update time"
+        updatedAt: String
     }
-)
-
-router.get(
-    '/router',
-    async (ctx): Promise<void> => {
-        ctx.body = 'Hello Koa Router!'
+    type Query {
+        "A list of websites"
+        websites: [website]
+        "Details of the website"
+        website(id: ID! = 0): website
     }
-)
+    type Mutation {
+        createWebsite(title: String!): website
+    }
+`
 
-app.use(router.routes()).use(router.allowedMethods())
+const server = new ApolloServer({
+    typeDefs,
+    resolvers: websiteResolver,
+})
 
-app.listen(4100, (): void => {
-    console.log(`Server run on http://127.0.0.1:4100`)
+server.applyMiddleware({ app })
+
+app.listen(5300, (): void => {
+    console.log(`Server ready at http://localhost:5300${server.graphqlPath}`)
 })

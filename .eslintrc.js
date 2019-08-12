@@ -26,6 +26,19 @@ module.exports = {
         'import/no-unresolved': [2, { ignore: [`U|utils.*`] }],
         'import/extensions': [2, 'never', { jsx: 'always', json: 'always' }],
         'no-unused-vars': ['warn', { args: 'after-used' }],
+        '@typescript-eslint/member-delimiter-style': [
+            2,
+            {
+                multiline: {
+                    delimiter: 'none',
+                    requireLast: true,
+                },
+                singleline: {
+                    delimiter: 'semi',
+                    requireLast: false,
+                },
+            },
+        ],
     },
     overrides: [
         {
