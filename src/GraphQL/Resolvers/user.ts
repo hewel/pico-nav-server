@@ -1,6 +1,6 @@
 import { IResolvers } from 'apollo-server-koa'
-import { Postgres } from '../../Database/connect'
-import { Website, websiteModel } from '../../Database/Models/Website'
+import { Postgres } from '../../Models/connect'
+import { Website, websiteModel } from '../../Models/ModelWebsite'
 
 Website.init(websiteModel, { tableName: 'website', sequelize: Postgres })
 
