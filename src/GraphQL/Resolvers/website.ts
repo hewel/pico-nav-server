@@ -10,9 +10,22 @@ export const resolvers: IResolvers = {
                     id,
                 },
             }),
-        websites: async (): Promise<Model[]> => Website.findAll(),
+        websitesConnection: async (_parent, { first, offset = 10 }): Promise<object> => {
+            const { count, rows } = await Website.findAndCountAll({
+                limit: offset,
+                offset: first,
+            })
+            return {
+                totalCount: count,
+                websites: rows,
+                pageInfo: {
+                    offset,
+                    hasNextPage: count >= offset + first,
+                },
+            }
+        },
     },
     Mutation: {
-        createWebsite: async (_parent, args): Promise<Model> => Website.create(args),
+        createWebsite: async (_parent, { website }): Promise<Model> => Website.create(website),
     },
 }
