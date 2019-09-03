@@ -1,6 +1,7 @@
-import { Model, DataTypes, ModelAttributes } from 'sequelize'
+import { DataTypes, ModelAttributes } from 'sequelize'
+import Model from './ModelBase'
 
-export class Website extends Model {
+export class WebsiteModel extends Model {
     public id!: number
     public title!: string
     public url!: string | null
@@ -12,7 +13,7 @@ export class Website extends Model {
     public readonly updatedAt!: Date
 }
 
-export const websiteModel: ModelAttributes = {
+export const websiteAttributes: ModelAttributes = {
     id: {
         type: new DataTypes.INTEGER(),
         autoIncrement: true,
