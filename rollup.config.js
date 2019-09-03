@@ -21,6 +21,7 @@ export default {
     require("module").builtinModules || Object.keys(process.binding("natives"))
   ),
   context: "global",
+  cache: isDev,
   plugins: [
     eslint({
       fix: true,
